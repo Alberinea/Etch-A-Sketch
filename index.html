@@ -2,11 +2,23 @@
 <html>
     <head>
         <link rel="stylesheet" href="style.css" />
-        <title>Sketchpad</title>
+        <title>Etch A Sketch</title>
         <meta charset="UTF-8" />
     </head>
     <body>
+        <div class="title">
+            <h1>Etch A Sketch</h1>
+        </div>
+        <div class="utilities">
+            <button class="button">Eraser</button>
+            <button class="button">Clear</button>
+            <button class="button">Colors</button>
+        </div>
         <div class="container"></div>
+        <div class="slider-container">
+            <p>Pixel size</p>
+            <input class="slider" type="range" min="1" max="100" value="50">
+        </div>
     </body>
 </html>
 <script src="script.js"></script>
