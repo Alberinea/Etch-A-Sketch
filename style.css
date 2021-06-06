@@ -39,9 +39,12 @@ html {
 }
 
 .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 30px);
+    grid-template-rows: repeat(auto-fit, 30px);
     border: solid 10px;
     min-height: 600px;
-    min-width: 800px;
+    min-width: 1200px;
     background-color: white;
 }
 
