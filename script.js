@@ -1,12 +1,14 @@
 const container = document.querySelector('.container');
 const clearButton = document.querySelector('#clear');
 const eraserButton = document.querySelector('#eraser');
-const pencilButton = document.querySelector('#pencil');
+const rainbowButton = document.querySelector('#rainbow');
+const defColorButton = document.querySelector('#black');
 let usingEraser = false;
+let usingRainbow = false;
 const defSize = 800;
 
 function createDiv() {
-    for (let index = 0; index < defSize; index++) {
+    for (let i = 0; i < defSize; i++) {
         const newDiv = document.createElement('div');
         newDiv.setAttribute('class', 'grid');
         container.appendChild(newDiv);
@@ -19,6 +21,15 @@ function black() {
 
 function white() {
     this.style.backgroundColor = 'white';
+}
+
+function rainbow() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    this.style.backgroundColor = `${color}`;
 }
 
 function draw(e) {
@@ -42,15 +53,6 @@ function reset() {
     grids.forEach((grid) => (grid.style.backgroundColor = 'white'));
 }
 
-function eraserFlag() {
-    if (!usingEraser) {
-        usingEraser = true;
-    }
-    else if (usingEraser) {
-        usingEraser = false;
-    }
-}
-
 function eraser(e) {
     if (usingEraser) {
         e.preventDefault();
@@ -67,11 +69,54 @@ function stopEraser(e) {
     }
 }
 
+function drawRainbow(e) {
+    if (usingRainbow && !usingEraser) {
+        e.preventDefault();
+        const grids = document.querySelectorAll('.grid');
+        grids.forEach((grid) => grid.addEventListener('mousemove', rainbow));
+    }
+}
+
+function stopRainbow(e) {
+    if (usingRainbow && !usingEraser) {
+        e.preventDefault();
+        const grids = document.querySelectorAll('.grid');
+        grids.forEach((grid) => grid.removeEventListener('mousemove', rainbow));
+    }
+}
+
+function eraserFlag() {
+    if (!usingEraser) {
+        usingEraser = true;
+    } else if (usingEraser) {
+        usingEraser = false;
+    }
+}
+
+function defFlag() {
+    usingRainbow = false;
+    container.removeEventListener('mousedown', drawRainbow);
+    container.removeEventListener('mouseup', stopRainbow);
+    container.addEventListener('mousedown', draw);
+    container.addEventListener('mouseup', stopDraw);
+}
+
+function rainbowFlag() {
+    usingRainbow = true;
+    container.removeEventListener('mousedown', draw);
+    container.removeEventListener('mouseup', stopDraw);
+    container.addEventListener('mousedown', drawRainbow);
+    container.addEventListener('mouseup', stopRainbow);
+}
 
 createDiv();
 container.addEventListener('mousedown', draw);
 container.addEventListener('mouseup', stopDraw);
 container.addEventListener('mousedown', eraser);
 container.addEventListener('mouseup', stopEraser);
+container.addEventListener('mousedown', drawRainbow);
+container.addEventListener('mouseup', stopRainbow);
 clearButton.addEventListener('click', reset);
 eraserButton.addEventListener('click', eraserFlag);
+rainbowButton.addEventListener('click', rainbowFlag);
+defColorButton.addEventListener('click', defFlag);
