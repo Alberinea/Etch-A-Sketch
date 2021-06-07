@@ -25,17 +25,17 @@ html {
 .button {
     height: 45px;
     width: 150px;
-    background: white;
+    background: rgba(255, 255, 255, 0.7);
     margin-bottom: 30px;
     font-size: 0.7rem;
-    border: solid 3px;
-    opacity: 0.6;
+    border: solid 3px black;
+    opacity: 0.7;
     border-radius: 34px;
     cursor: pointer;
 }
 
 .button:hover {
-    opacity: 1;
+    background: rgba(255, 255, 255, 1);
 }
 
 .container {
@@ -98,9 +98,13 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.7);
     transition: 0.4s;
     border-radius: 34px;
+}
+
+.slider:hover {
+    background-color: rgba(255, 255, 255, 0.82);
 }
 
 .slider:before {
@@ -110,9 +114,9 @@ html {
     width: 32px;
     left: 4px;
     bottom: 3px;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     -webkit-transition: 0.4s;
-    transition: 0.4s;
+    transition: 0.2s;
     border-radius: 50%;
 }
 
