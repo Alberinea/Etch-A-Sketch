@@ -43,7 +43,12 @@ function reset() {
 }
 
 function eraserFlag() {
-    usingEraser = true;
+    if (!usingEraser) {
+        usingEraser = true;
+    }
+    else if (usingEraser) {
+        usingEraser = false;
+    }
 }
 
 function eraser(e) {
@@ -55,7 +60,6 @@ function eraser(e) {
 }
 
 function stopEraser(e) {
-    console.log('a');
     if (usingEraser) {
         e.preventDefault();
         const grids = document.querySelectorAll('.grid');
@@ -64,15 +68,10 @@ function stopEraser(e) {
 }
 
 
-function pencil() {
-    usingEraser = false;
-}
-
 createDiv();
 container.addEventListener('mousedown', draw);
 container.addEventListener('mouseup', stopDraw);
 container.addEventListener('mousedown', eraser);
 container.addEventListener('mouseup', stopEraser);
-pencilButton.addEventListener('click', pencil);
 clearButton.addEventListener('click', reset);
 eraserButton.addEventListener('click', eraserFlag);

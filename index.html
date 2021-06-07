@@ -10,15 +10,17 @@
             <h1>Etch A Sketch</h1>
         </div>
         <div class="utilities">
-            <button id="eraser" class="button">Eraser</button>
-            <button id="pencil" class="button">pencil</button>
+            <label class="switch">
+                <input type="checkbox"/>
+                <div class="slider" id="eraser"></div>
+            </label>
             <button id="clear" class="button">Clear</button>
-            <button id="colors" class="button">Colors</button>
+            <button id="color" class="button">Colors</button>
         </div>
         <div class="container"></div>
         <div class="slider-container">
             <p>Pixel size</p>
-            <input class="slider" type="range" min="1" max="100" value="50">
+            <input class="size-slider" type="range" min="1" max="100" value="50" />
         </div>
     </body>
 </html>

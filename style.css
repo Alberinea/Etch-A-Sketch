@@ -24,13 +24,14 @@ html {
 }
 
 .button {
-    height: 40px;
+    height: 45px;
     width: 150px;
     background: white;
     margin-bottom: 30px;
     font-size: 0.7rem;
     border: solid 3px;
-    opacity: 0.8;
+    opacity: 0.6;
+    border-radius: 34px;
     cursor: pointer;
 }
 
@@ -56,7 +57,7 @@ html {
     font-weight: bolder;
 }
 
-.slider {
+.size-slider {
     -webkit-appearance: none;
     flex-grow: 1;
     margin-left: 20px;
@@ -67,7 +68,7 @@ html {
     border: solid 4px;
 }
 
-.slider::-webkit-slider-thumb {
+.size-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     width: 25px;
     height: 25px;
@@ -75,7 +76,66 @@ html {
     cursor: pointer;
 }
 
-.slider:hover {
+.size-slider:hover {
     opacity: 1;
 }
 
+.switch {
+    position: relative;
+    width: 150px;
+    height: 38px;
+    border: solid 3px black;
+    border-radius: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: '';
+    height: 32px;
+    width: 32px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #0b75d8;
+}
+
+input:checked + .slider:before {
+    transform: translateX(110px);
+}
+
+.slider:after {
+    content: 'Eraser';
+    color: black;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    font-size: 0.7rem;
+}
+
+input:checked + .slider:after
+{  
+  color: white;
+}
