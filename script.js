@@ -4,7 +4,6 @@ const eraserButton = document.querySelector('#eraser');
 const rainbowButton = document.querySelector('#rainbow');
 const defColorButton = document.querySelector('#black');
 let usingEraser = false;
-let usingRainbow = false;
 const defSize = 800;
 
 function createDiv() {
@@ -70,7 +69,7 @@ function stopEraser(e) {
 }
 
 function drawRainbow(e) {
-    if (usingRainbow && !usingEraser) {
+    if (!usingEraser) {
         e.preventDefault();
         const grids = document.querySelectorAll('.grid');
         grids.forEach((grid) => grid.addEventListener('mousemove', rainbow));
@@ -78,7 +77,7 @@ function drawRainbow(e) {
 }
 
 function stopRainbow(e) {
-    if (usingRainbow && !usingEraser) {
+    if (!usingEraser) {
         e.preventDefault();
         const grids = document.querySelectorAll('.grid');
         grids.forEach((grid) => grid.removeEventListener('mousemove', rainbow));
@@ -86,15 +85,18 @@ function stopRainbow(e) {
 }
 
 function eraserFlag() {
+    container.addEventListener('mousedown', eraser);
+    container.addEventListener('mouseup', stopEraser);
     if (!usingEraser) {
         usingEraser = true;
     } else if (usingEraser) {
         usingEraser = false;
+        container.removeEventListener('mousedown', eraser);
+        container.removeEventListener('mouseup', stopEraser);
     }
 }
 
 function defFlag() {
-    usingRainbow = false;
     container.removeEventListener('mousedown', drawRainbow);
     container.removeEventListener('mouseup', stopRainbow);
     container.addEventListener('mousedown', draw);
@@ -102,7 +104,6 @@ function defFlag() {
 }
 
 function rainbowFlag() {
-    usingRainbow = true;
     container.removeEventListener('mousedown', draw);
     container.removeEventListener('mouseup', stopDraw);
     container.addEventListener('mousedown', drawRainbow);
@@ -112,10 +113,6 @@ function rainbowFlag() {
 createDiv();
 container.addEventListener('mousedown', draw);
 container.addEventListener('mouseup', stopDraw);
-container.addEventListener('mousedown', eraser);
-container.addEventListener('mouseup', stopEraser);
-container.addEventListener('mousedown', drawRainbow);
-container.addEventListener('mouseup', stopRainbow);
 clearButton.addEventListener('click', reset);
 eraserButton.addEventListener('click', eraserFlag);
 rainbowButton.addEventListener('click', rainbowFlag);
