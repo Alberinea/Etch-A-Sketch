@@ -6,7 +6,7 @@ html {
     min-height: 100%;
     margin: auto;
     font-size: 30px;
-    overflow: hidden;
+    overflow: auto;
 }
 
 .title {
@@ -40,8 +40,7 @@ html {
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 30px);
-    grid-template-rows: repeat(auto-fit, 30px);
+    grid-template: repeat(25, 1fr) / repeat(50, 1fr); 
     border: solid 10px;
     min-height: 600px;
     min-width: 1200px;
@@ -98,13 +97,13 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
     transition: 0.4s;
     border-radius: 34px;
 }
 
 .slider:hover {
-    background-color: rgba(255, 255, 255, 0.82);
+    background-color: rgba(255, 255, 255, 0.65);
 }
 
 .slider:before {
@@ -114,7 +113,7 @@ html {
     width: 32px;
     left: 4px;
     bottom: 3px;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     -webkit-transition: 0.4s;
     transition: 0.2s;
     border-radius: 50%;
@@ -138,7 +137,7 @@ input:checked + .slider:before {
     font-size: 0.7rem;
 }
 
-input:checked + .slider:after
-{  
-  color: white;
+input:checked + .slider:after {
+    color: white;
 }
+

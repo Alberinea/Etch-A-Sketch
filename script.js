@@ -3,20 +3,35 @@ const clearButton = document.querySelector('#clear');
 const eraserButton = document.querySelector('#eraser');
 const rainbowButton = document.querySelector('#rainbow');
 const defColorButton = document.querySelector('#black');
+const slideBar = document.querySelector('.size-slider');
 let usingEraser = false;
 let usingRainbow = false;
 let usingDefColor = true;
-const defSize = 800;
 defColorButton.style.backgroundColor = '#0b75d8';
-defColorButton.style.color = 'white'
-defColorButton.style.opacity = '1'
+defColorButton.style.color = 'white';
+defColorButton.style.opacity = '1';
 
-function createDiv() {
-    for (let i = 0; i < defSize; i++) {
-        const newDiv = document.createElement('div');
-        newDiv.setAttribute('class', 'grid');
-        container.appendChild(newDiv);
+function createGrid() {
+    let defSize = parseInt(slideBar.value);
+    let gridSize = defSize * (defSize / 2);
+    if (defSize % 2 != 0) {
+        gridSize += defSize;
     }
+    for (let i = 0; i < gridSize + defSize; i++) {
+        const newGrid = document.createElement('div');
+        newGrid.setAttribute('class', 'grid');
+        container.appendChild(newGrid);
+    }
+}
+
+function removeGrid() {
+    const newGrids = document.querySelectorAll('.grid');
+    newGrids.forEach((newGrid) => container.removeChild(newGrid));
+}
+
+function changePixel() {
+    const defSize = slideBar.value;
+    container.style.cssText = `grid-template: repeat(${Math.ceil(defSize / 2)}, 1fr) / repeat(${defSize}, 1fr)`;
 }
 
 function black() {
@@ -92,7 +107,6 @@ function stopRainbow(e) {
 function eraserFlag() {
     container.addEventListener('mousedown', eraser);
     window.addEventListener('mouseup', stopEraser);
-    console.log('a');
     if (!usingEraser) {
         usingEraser = true;
     } else if (usingEraser) {
@@ -139,7 +153,16 @@ function colorOff() {
     }
 }
 
-createDiv();
+function changePixelValue() {
+    slideBar.innerHTML = this.value;
+    console.log(this.value);
+    removeGrid();
+    changePixel();
+    createGrid();
+}
+
+createGrid();
+slideBar.addEventListener('click', changePixelValue);
 window.addEventListener('click', colorOff);
 container.addEventListener('mousedown', draw);
 window.addEventListener('mouseup', stopDraw);
