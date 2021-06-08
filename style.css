@@ -11,6 +11,7 @@ html {
 
 .title {
     text-align: center;
+    color: white;
     font-size: 0.8rem;
     font-weight: bolder;
     text-decoration: underline;
@@ -40,8 +41,7 @@ html {
 
 .container {
     display: grid;
-    grid-template: repeat(25, 1fr) / repeat(50, 1fr); 
-    border: solid 10px;
+    grid-template: repeat(38, 1fr) / repeat(76, 1fr); 
     min-height: 600px;
     min-width: 1200px;
     background-color: white;
@@ -53,6 +53,7 @@ html {
     align-items: center;
     font-size: 0.85rem;
     font-weight: bolder;
+    color: white;
 }
 
 .size-slider {
