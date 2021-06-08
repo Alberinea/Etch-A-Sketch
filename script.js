@@ -17,7 +17,7 @@ function createGrid() {
     if (defSize % 2 != 0) {
         gridSize += defSize;
     }
-    for (let i = 0; i < gridSize + defSize; i++) {
+    for (let i = 0; i < gridSize; i++) {
         const newGrid = document.createElement('div');
         newGrid.setAttribute('class', 'grid');
         container.appendChild(newGrid);
@@ -30,8 +30,8 @@ function removeGrid() {
 }
 
 function changePixel() {
-    const defSize = slideBar.value;
-    container.style.cssText = `grid-template: repeat(${Math.ceil(defSize / 2)}, 1fr) / repeat(${defSize}, 1fr)`;
+    let defSize = slideBar.value;
+    container.style.cssText = `grid-template: repeat(${Math.round(defSize / 2)}, 1fr) / repeat(${defSize}, 1fr)`;
 }
 
 function black() {
@@ -155,7 +155,6 @@ function colorOff() {
 
 function changePixelValue() {
     slideBar.innerHTML = this.value;
-    console.log(this.value);
     removeGrid();
     changePixel();
     createGrid();
